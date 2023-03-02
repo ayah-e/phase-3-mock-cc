@@ -4,24 +4,43 @@ class Customer:
         self.first_name = first_name
         self.last_name = last_name
         self.reviews = []
-        self.restaurants = []
+        self.restaurants = [] 
 
-    def first_name(self):
-        # first_name property goes here!
-        pass
+    def get_first_name(self):
+        return self._first_name
 
-    def last_name(self):
-        # last_name property goes here!
-        pass
+    def get_last_name(self):
+        return self._last_name
+    
+    def set_first_name(self, first_name):
+        if type(first_name) == str and 1 <= len(first_name) <= 25:
+            self._first_name = first_name
+        else: 
+            raise Exception("First name must be between 1 and 25 characters long")
+    
+    def set_last_name(self, last_name):
+        if type(last_name) == str and 1 <= len(last_name) <= 25:
+            self._last_name = last_name
+        else:
+            raise Exception("Last name must be between 1 and 25 characters long")
 
+    first_name = property(get_first_name, set_first_name)
+    last_name = property(get_last_name, set_last_name)
+    
     def get_full_name(self):
-        pass
+        return self.first_name + ' ' + self.last_name
+    
 
     def get_num_reviews(self):
-        pass
+        return len(self.reviews)
 
     def add_review(self, restaurant, rating):
         # This prevents a circular import!
         # Don't worry about it right now, but check it out when you have the time!
         from classes.review import Review
-        pass
+        Review(self, restaurant, rating)
+
+
+
+
+        
